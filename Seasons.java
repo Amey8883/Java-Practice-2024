@@ -16,7 +16,7 @@ class Seasons{
 		case "APR":
 		case "MAY":System.out.println(month + "its Summer");
 			break;
-		case "Jun":
+		case "JUN":
 		case "JUL":
 		case "AUG":
 		case "SEP":System.out.println(month + "its Rainy");
