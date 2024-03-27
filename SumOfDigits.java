@@ -10,7 +10,6 @@ class SumOfDigits{
 		while(num>0){
 			int rem = num%10;
 			sum += rem;
-			// rev = rev*10/num;
 	        num /= 10;
 		}
 		System.out.println("Sum of digits "+ originalNum +" is:"+sum);
