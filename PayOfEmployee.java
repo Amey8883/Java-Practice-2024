@@ -16,6 +16,6 @@ class PayOfEmployee{
 		else{
         pay=pay+pay*1/100;
          }
-         System.out.println("total"+pay);
+         System.out.println("total "+pay);
 	}
 }
