@@ -15,3 +15,5 @@ class PrimeNumber{
 		System.out.println(flag?"Prime":"Not Prime");
 	}
 }
+
+

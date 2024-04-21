@@ -4,14 +4,14 @@ class SumOfDigits{
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Enter the digits: ");
 		int num = sc.nextInt();
+		int dup = num;     
 		int sum = 0;
-		int originalNum = num;
 
 		while(num>0){
-			int rem = num%10;
-			sum += rem;
-	        num /= 10;
+			int rem = num%10;   
+			sum += rem;         
+	        num /= 10;       
 		}
-		System.out.println("Sum of digits "+ originalNum +" is:"+sum);
+		System.out.println("Sum of digits "+ dup +" is:"+sum);
 	}
 }
