@@ -1,0 +1,4 @@
+class DemoA
+{
+	int num;
+}

@@ -1,110 +1,207 @@
 import java.util.Scanner;
-class Bank
-{
-	static String name;
-	static String address;
-	static long addharNo;
-	static long phoneNo;
-	static double bal;
-	static int upiPin;
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
 
-		outerloop:
-		for(; ;){
-			System.out.println("******* Welcome to LaxmiChitFund *******");
-			System.out.println();
-			System.out.println("1.Create Account");
-			System.out.println("2.Existing Account Holder");
-			System.out.print("Enter an option");
-			int option = sc.nextInt();
-			System.out.println();
+class Account {
+    private String accountHolderName;
+    private String address;
+    private long addharNumber;
+    private String panNumber;
+    private int upiPin;
+    private double balance;
+    private long phoneNumber;
 
-			switch(option)
-			{
-			case 1:{
-				System.out.println("*** Create Account Module");
-				sc.nextLine();
-				System.out.print("Enter your name: ");
-				name = sc.nextLine();
-				System.out.print("Enter your Address: ");
-				address = sc.nextLine();
-				System.out.print("Phone Number: ");
-				phoneNo = sc.nextLong();
-				System.out.print("Addhar Number: ");
-				addharNo = sc.nextLong();
-				System.out.print("Deposite Amount: ");
-				bal = sc.nextDouble();
-				System.out.print("Enter a upi pin: ");
-				upiPin = sc.nextInt();
-				System.out.println("Account Created Successfully");
-				System.out.println();
-				break;
-			}
-		case 2:{
-			for(; ;){
-				System.out.println();
-				System.out.println("**Features**");
-				System.out.println("1.Check Balance 2.Deposite 3.Withdraw 4.Info 5.Logout");
-				System.out.println();
-				System.out.print("Enter an option");
-				int opt = sc.nextInt();
-				switch(opt)
-				{
-				case 1:{
-					System.out.println("*** Check Balance ***");
-					System.out.print("Enter your upi Pin: ");
-					int userPin = sc.nextInt();
-					if(userPin==upiPin){
-						System.out.println("Your account Balance is - "+bal+" rs");
-					}else{
-						System.out.println("Wrong Upi Pin");
-					}
-					break;
-				}
-				case 2:{
-					System.out.println("*** Deposite amount ***");
-					System.out.println();
-					System.out.print("Enter Amount: ");
-					double depAmount = sc.nextDouble();
-					bal = depAmount;
-					System.out.println("Amount Deposite Successfully");
-					break;
-				}
-			case 3:{
-				System.out.println("***Withdraw Amount***");
-				System.out.println();
-				System.out.print("Enter ab Amount: ");
-				double withdrawAmount = sc.nextDouble();
-				if(withdrawAmount<=bal){
-					System.out.println("Amount Withdraw Successfully");
-					bal = bal - withdrawAmount;
-				}else{
-					System.out.println("Insufficient Funds");
-				}
-				break;
-			}
-		case 4:{
-			System.out.println("*** Account Info ***");
-			System.out.println();
-			System.out.println("Account Holder name: "+name);
-			System.out.println();
-			System.out.println("Address: "+address);
-			System.out.println("Phone Number: "+phoneNo);
-			System.out.println("Addhar Number: "+addharNo);
-			break;
-		}
-	case 5:{
-		System.exit(0);
-	}
-default:System.out.println("Invalid option");
-	break;
-			}
-			}
-			}
-		default:System.out.println("Invalid option ");
-			break;
-	   	}
-	  }
-	}
+    Account(String cname, String cadd, String cpan, int cupi, double cbal, long cph) {
+        this.accountHolderName = cname;
+        this.address = cadd;
+        this.panNumber = cpan;
+        this.upiPin = cupi;
+        this.balance = cbal;
+        this.phoneNumber = cph;
+    }
+
+    public void setAccountHolderName(String updateName) {
+        this.accountHolderName = updateName;
+    }
+
+    public String getAccountHolderName() {
+        return accountHolderName;
+    }
+
+    public void setAddress(String uadd) {
+        this.address = uadd;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setUpi(int uupi) {
+        this.upiPin = uupi;
+    }
+
+    public void setPhone(long uphone) {
+        this.phoneNumber = uphone;
+    }
+
+    public long getPhone() {
+        return phoneNumber;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void deposit(double amount) {
+        balance =balance+ amount;
+        System.out.println("Amount deposited  Updated balance: " + balance);
+    }
+
+    public void withdraw(double amount) {
+        if (balance >= amount) {
+            balance = balance - amount;
+            System.out.println("Amount withdrawn Updated balance: " + balance);
+        } 
+        else 
+        {
+            System.out.println("Insufficient balance");
+        }
+    }
+}
+
+public class Bank {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Account obj = null;
+        boolean exit = false;
+        double cbal = 0; 
+
+        while (!exit) {
+            System.out.println("1. Create Account");
+            System.out.println("2. Existing User");
+            System.out.println("3. Exit");
+            System.out.println("Choose option");
+            int num = sc.nextInt();
+
+            switch (num) {
+                case 1: {
+                    System.out.println("Enter Name:");
+                    String cname = sc.next();
+                    System.out.println("Enter Address");
+                    String cadd = sc.next();
+                    System.out.println("Enter Pan Number");
+                    String cpan = sc.next();
+                    System.out.println("Enter Upi Pin");
+                    int cupi = sc.nextInt();
+                    System.out.println("Enter Balance");
+                    cbal = sc.nextDouble(); // update currentbalance
+                    System.out.println("Enter Phone Number");
+                    long cph = sc.nextLong();
+                    System.out.println("Account Created Successfully");
+
+                    obj = new Account(cname, cadd, cpan, cupi, cbal, cph);
+                }
+                break;
+
+                case 2: {
+                    if (obj != null) {
+                        System.out.println("1. Check Balance");
+                        System.out.println("2. Deposit Amount");
+                        System.out.println("3. Withdrawal Amount");
+                        System.out.println("4. Update Account");
+                        System.out.println("5. Logout");
+                        System.out.println("Choose option");
+                        int num1 = sc.nextInt();
+
+                        switch (num1) {
+                            case 1: {
+                                System.out.println("Balance is: " + obj.getBalance());
+                            }
+                            break;
+
+                            case 2: {
+                                System.out.println("Enter Deposit amount:");
+                                double deposit = sc.nextDouble();
+                                obj.deposit(deposit);
+                            }
+                            break;
+
+                            case 3: {
+                                System.out.println("Enter Withdrawal amount:");
+                                double withdrawal = sc.nextDouble();
+                                obj.withdraw(withdrawal);
+                            }
+                            break;
+
+                            case 4: {
+                                System.out.println("1. Account Holder Name");
+                                System.out.println("2. Address");
+                                System.out.println("3. UPI Pin");
+                                System.out.println("4. Phone Number");
+                                System.out.println("Choose option");
+                                int num2 = sc.nextInt();
+
+                                switch (num2) {
+                                    case 1: {
+                                        System.out.println("Enter New name:");
+                                        String uname = sc.next();
+                                        obj.setAccountHolderName(uname);
+                                    }
+                                    break;
+
+                                    case 2: {
+                                        System.out.println("Enter New Address:");
+                                        String uadd = sc.next();
+                                        obj.setAddress(uadd);
+                                    }
+                                    break;
+
+                                    case 3: {
+                                        System.out.println("Enter New UPI:");
+                                        int uupi = sc.nextInt();
+                                        obj.setUpi(uupi);
+                                    }
+                                    break;
+
+                                    case 4: {
+                                        System.out.println("Enter New Phone Number:");
+                                        long uphone = sc.nextLong();
+                                        obj.setPhone(uphone);
+                                    }
+                                    break;
+
+                                    default:
+                                        System.out.println("Incorrect Option");
+                                }
+                            }
+                            break;
+
+                            case 5: 
+                            {
+                                obj = null;
+                                System.out.println("Log out");
+                                System.exit(0);
+                            }
+                            break;
+
+                            default:
+                                System.out.println("enter correct option");
+                        }
+                    } 
+                    else 
+                    {
+                        System.out.println("Create account first");
+                    }
+                }
+                break;
+
+                case 3: {
+                    exit = true;
+                    System.out.println("See you soon");
+                }
+                break;
+
+                default:
+                    System.out.println(" Enter Correct Option");
+            }
+        }
+    }
 }
